@@ -8,15 +8,15 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// In-memory database
+
 let todos = [];
 
-// GET /todos - Retrieve all to-do items
+// Retrieve all to-do items
 app.get('/todos', (req, res) => {
     res.json(todos);
 });
 
-// POST /todos - Create a new to-do item
+// Create a new to-do item
 app.post('/todos', (req, res) => {
     const newTodo = {
         id: todos.length + 1,
@@ -27,7 +27,7 @@ app.post('/todos', (req, res) => {
     res.status(201).json(newTodo);
 });
 
-// PUT /todos/:id - Update a to-do item
+// Update a to-do item
 app.put('/todos/:id', (req, res) => {
     const { id } = req.params;
     const todo = todos.find(t => t.id === parseInt(id));
@@ -42,7 +42,7 @@ app.put('/todos/:id', (req, res) => {
     res.json(todo);
 });
 
-// DELETE /todos/:id - Delete a to-do item
+// Delete a to-do item
 app.delete('/todos/:id', (req, res) => {
     const { id } = req.params;
     const todoIndex = todos.findIndex(t => t.id === parseInt(id));
@@ -55,7 +55,6 @@ app.delete('/todos/:id', (req, res) => {
     res.status(204).send();
 });
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
